@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace LojaVirtual.Repositories
 {
@@ -52,6 +53,9 @@ namespace LojaVirtual.Repositories
             return _banco.Colaboradores.ToList();
         }
 
-        
+        public IPagedList<Colaborador> ObterTodosColaboradores(int? pagina)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

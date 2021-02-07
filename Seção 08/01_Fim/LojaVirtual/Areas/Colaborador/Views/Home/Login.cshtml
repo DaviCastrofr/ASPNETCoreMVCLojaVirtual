@@ -1,0 +1,44 @@
+﻿@model LojaVirtual.Models.Colaborador
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<main role="main">
+    <br />
+    <br />
+    <section class="container">
+        <aside class="col-sm-4">
+            <h3 class="subtitle-doc">
+                Login doColaborar
+                <a href="#" data-html="code_login_1" class="showcode">[code]</a>
+            </h3>
+            <div id="code_login_1">
+                <div class="card">
+                    <article class="card-body">
+                        <a asp-action="CadastroCliente" asp-controller="Home" class="float-right btn btn-outline-primary">Cadatre-se</a>
+                        <h4 class="card-title mb-4 mt-1">Entrar</h4>
+                        @if (ViewData["MSG_E"] != null)
+                        {
+                            <p class="alert alert-danger">@Html.Raw(ViewData["MSG_E"])</p>
+                        }
+                        <form asp-action="Login" asp-controller="Home" method="post">
+                            <div class="form-group">
+                                <label>E-mail</label>
+                                <input class="form-control" asp-for="Email" placeholder="Email" type="email">
+                            </div>
+                            <div class="form-group">
+                                <a class="float-right" href="#">Esqueceu?</a>
+                                <label>Senha</label>
+                                <input class="form-control" asp-for="Senha" placeholder="******" type="password">
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block"> Acessar </button>
+                            </div>
+                        </form>
+                    </article>
+                </div>
+            </div>
+        </aside>
+    </section>
+</main>

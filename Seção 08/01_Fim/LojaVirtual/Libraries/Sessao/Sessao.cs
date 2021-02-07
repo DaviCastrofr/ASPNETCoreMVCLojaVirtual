@@ -12,7 +12,7 @@ namespace LojaVirtual.Libraries.Sessao
         public Sessao(IHttpContextAccessor context)
         {
             _context = context;
-        }
+        } 
 
         public void Cadastrar(string Key, string Valor)
         {

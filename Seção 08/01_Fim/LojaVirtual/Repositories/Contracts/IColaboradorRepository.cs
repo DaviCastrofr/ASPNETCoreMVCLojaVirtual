@@ -1,12 +1,14 @@
 ﻿using LojaVirtual.Models;
+using X.PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace LojaVirtual.Repositories.Contracts
 {
-    interface IColaboradorRepository
+    public interface IColaboradorRepository
     {
         Colaborador Login(string Email, string Senha);
         void Cadastrar(Colaborador colaborador);
@@ -14,5 +16,6 @@ namespace LojaVirtual.Repositories.Contracts
         void Excluir(int Id);
         Colaborador ObterColaborador(int Id);
         IEnumerable<Colaborador> ObterTodosColaboradores();
+        IPagedList<Colaborador> ObterTodosColaboradores(int? pagina);
     }
 }

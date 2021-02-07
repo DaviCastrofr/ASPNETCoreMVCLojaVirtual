@@ -19,6 +19,29 @@ namespace LojaVirtual.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.2");
 
+            modelBuilder.Entity("LojaVirtual.Models.Categoria", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int?>("CategoriaPaiId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Slug")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoriaPaiId");
+
+                    b.ToTable("Categorias");
+                });
+
             modelBuilder.Entity("LojaVirtual.Models.Cliente", b =>
                 {
                     b.Property<int>("Id")
@@ -96,6 +119,15 @@ namespace LojaVirtual.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("NewsletterEmails");
+                });
+
+            modelBuilder.Entity("LojaVirtual.Models.Categoria", b =>
+                {
+                    b.HasOne("LojaVirtual.Models.Categoria", "CategoriaPai")
+                        .WithMany()
+                        .HasForeignKey("CategoriaPaiId");
+
+                    b.Navigation("CategoriaPai");
                 });
 #pragma warning restore 612, 618
         }

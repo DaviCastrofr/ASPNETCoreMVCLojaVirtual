@@ -36,25 +36,25 @@ namespace LojaVirtual
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<INewsletterRepository, NewsletterRepository>();
             services.AddScoped<IColaboradorRepository, ColaboradorRepository>();
-            //services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+            services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {
-                options.CheckConsentNeeded = context => true; // consent required
+                options.CheckConsentNeeded = context => true; 
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddMemoryCache(); //Guardar os dados na memória
+            services.AddMemoryCache(); 
             services.AddSession(opts =>
             {
-                opts.Cookie.IsEssential = true; // make the session cookie Essential
+                opts.Cookie.IsEssential = true; 
             });
             
             
 
             services.AddScoped<Sessao>();
             services.AddScoped<LoginCliente>();
-            //services.AddScoped<LoginColaborador>();
+            services.AddScoped<LoginColaborador>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
@@ -62,7 +62,7 @@ namespace LojaVirtual
             services.AddDbContext<LojaVirtualContext>(options => options.UseSqlServer(connection));
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -72,8 +72,7 @@ namespace LojaVirtual
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                 app.UseHsts();
             }
 
             app.UseHttpsRedirection();

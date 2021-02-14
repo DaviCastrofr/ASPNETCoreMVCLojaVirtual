@@ -13,9 +13,10 @@ namespace LojaVirtual.Repositories.Contracts
         Colaborador Login(string Email, string Senha);
         void Cadastrar(Colaborador colaborador);
         void Atulizar(Colaborador colaborador);
+        void AtulizarSenha(Colaborador colaborador);
         void Excluir(int Id);
         Colaborador ObterColaborador(int Id);
-        IEnumerable<Colaborador> ObterTodosColaboradores();
+        List<Colaborador> ObterColaboradorPorEmail(string email);
         IPagedList<Colaborador> ObterTodosColaboradores(int? pagina);
     }
 }

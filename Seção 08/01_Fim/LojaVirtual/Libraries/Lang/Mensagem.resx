@@ -128,6 +128,17 @@
   </data>
   <data name="MSG_E004" xml:space="preserve">
     <value>O Campo {0} não é valido!</value>
-    <comment> </comment>
+  </data>
+  <data name="MSG_E005" xml:space="preserve">
+    <value>O Campo {0} não confere com {1} </value>
+  </data>
+  <data name="MSG_S001" xml:space="preserve">
+    <value>Registro salvo com sucesso!</value>
+  </data>
+  <data name="MSG_S002" xml:space="preserve">
+    <value>Registro excluido com sucesso!</value>
+  </data>
+  <data name="MSG_S003" xml:space="preserve">
+    <value>Senha enviada para o e-mail do colaborador com sucesso!</value>
   </data>
 </root>

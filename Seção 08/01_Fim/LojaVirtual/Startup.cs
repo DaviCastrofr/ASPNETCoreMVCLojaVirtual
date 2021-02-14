@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using LojaVirtual.Database;
+using LojaVirtual.Libraries.Email;
 using LojaVirtual.Libraries.Login;
 using LojaVirtual.Libraries.Sessao;
 using LojaVirtual.Repositories;
@@ -31,6 +34,13 @@ namespace LojaVirtual
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
             services.AddHttpContextAccessor();
             services.AddScoped<IClienteRepository, ClienteRepository>();
@@ -38,9 +48,25 @@ namespace LojaVirtual
             services.AddScoped<IColaboradorRepository, ColaboradorRepository>();
             services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 
+            services.AddScoped<SmtpClient>(options => {
+                SmtpClient smtp = new SmtpClient()
+                {
+                    Host = Configuration.GetValue<string>("Email:ServerMSTP"),
+                    Port = Configuration.GetValue<int>("Email:ServerPort"),
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(Configuration.GetValue<string>("Email:Username"), Configuration.GetValue<string>("Email:Password")),
+                    EnableSsl = true
+                };
+                return smtp;
+            });
+            services.AddScoped<GerenciarEmail>();
+
+
+
+
             services.Configure<CookiePolicyOptions>(options =>
             {
-                options.CheckConsentNeeded = context => true; 
+                options.CheckConsentNeeded = context => false; 
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
@@ -89,6 +115,7 @@ namespace LojaVirtual
 
             app.UseAuthorization();
 
+            app.UseMiddleware<ValidateAntiForgeryTokenAttribute>();
 
             app.UseEndpoints(endpoints =>
             {

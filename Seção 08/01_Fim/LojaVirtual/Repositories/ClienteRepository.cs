@@ -50,11 +50,16 @@ namespace LojaVirtual.Repositories
             return _banco.Clientes.Find(Id);
         }
 
-        public IPagedList<Cliente> ObterTodosClientes(int? pagina)
+        public IPagedList<Cliente> ObterTodosClientes(int? pagina, string pesquisa)
         {
-            int RegistroPorPagina = 10;
+            int RegistroPorPagina = 5;
             int numeroPagina = pagina ?? 1;
-            return _banco.Clientes.ToPagedList<Cliente>(numeroPagina, RegistroPorPagina);
+            var bancoCliente = _banco.Clientes.AsQueryable();
+            if (!string.IsNullOrEmpty(pesquisa))
+            {
+                bancoCliente = bancoCliente.Where(a => a.Nome.Contains(pesquisa.Trim()) || a.Email.Contains(pesquisa.Trim()));
+            }
+            return bancoCliente.ToPagedList<Cliente>(numeroPagina, RegistroPorPagina);
 
         }
 

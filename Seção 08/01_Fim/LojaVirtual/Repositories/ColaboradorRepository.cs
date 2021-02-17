@@ -68,7 +68,7 @@ namespace LojaVirtual.Repositories
 
         public IPagedList<Colaborador> ObterTodosColaboradores(int? pagina)
         {
-            int RegistroPorPagina = 10;
+            int RegistroPorPagina = 5;
             int numeroPagina = pagina ?? 1;
             return _banco.Colaboradores.Where(a=>a.Tipo != ColaboradorTipoConstant.Gerente).ToPagedList<Colaborador>(numeroPagina, RegistroPorPagina);
         }

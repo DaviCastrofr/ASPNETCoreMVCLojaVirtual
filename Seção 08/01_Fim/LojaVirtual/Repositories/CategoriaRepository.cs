@@ -46,7 +46,7 @@ namespace LojaVirtual.Repositories
 
         public IPagedList<Categoria> ObterTodasCategorias(int? pagina)
         {
-            int RegistroPorPagina = 10;//_conf.GetValue<int>("RegistroPorPagina");
+            int RegistroPorPagina = 5;//_conf.GetValue<int>("RegistroPorPagina");
             int numeroPagina = pagina ?? 1;
             return _banco.Categorias.Include(a=>a.CategoriaPai).ToPagedList<Categoria>(numeroPagina, RegistroPorPagina);
         }

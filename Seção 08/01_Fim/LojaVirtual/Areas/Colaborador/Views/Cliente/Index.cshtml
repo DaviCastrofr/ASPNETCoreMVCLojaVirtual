@@ -5,12 +5,22 @@
 
 @{
     ViewData["Title"] = "Index";
+    var pesquisa = Context.Request.Query["pesquisa"];
 }
 <h1>Cliente</h1>
 
-<br/>
-<br/>
-@if(TempData["MSG_S"] != null)
+<br />
+<br />
+<form  method="get">
+    <div class="form-group">
+        <label for="pesquisa" class="col-sm-2 col-form-label"></label>
+        <input type="text" name="pesquisa" value="@pesquisa" id="pesquisa" class="form-control" placeholder="Digite o nome ou email do cliente">
+    </div>
+    <button type="submit" class="btn btn-primary">OK</button>
+</form>
+<br />
+<br />
+@if (TempData["MSG_S"] != null)
 {
     <p class="alert alert-success">@TempData["MSG_S"]</p>
 }
@@ -33,28 +43,29 @@
                     <tr>
                         <th scope="row">@cliente.Id</th>
                         <td>@cliente.Nome</td>
-                        <td>@cliente.Email
-                        </td>
                         <td>
-                            @if (cliente.Situacao == "A")
-                            {
-                                <a asp-action="AtivarDesativar" asp-route-id="@cliente.Id" class="btn btn-danger">Desativar</a>
-                            }
-                            else
-                            {
-                                <a asp-action="AtivarDesativar" asp-route-id="@cliente.Id" class="btn btn-secondary">Ativar</a>
-                            }
+                            @cliente.Email
+                    </td>
+                    <td>
+                        @if (cliente.Situacao == "A")
+                        {
+                            <a asp-action="AtivarDesativar" asp-route-id="@cliente.Id" class="btn btn-danger">Desativar</a>
+                        }
+                        else
+                        {
+                            <a asp-action="AtivarDesativar" asp-route-id="@cliente.Id" class="btn btn-secondary">Ativar</a>
+                        }
 
-                        </td>
-                    </tr>
-                }
+                    </td>
+                </tr>
+            }
             </tbody>
         </table>
     </div>
 
-    @Html.PagedListPager((IPagedList)Model, pagina => Url.Action("Index", new { pagina }))
+    @Html.PagedListPager((IPagedList)Model, pagina => Url.Action("Index", new { pagina = pagina, pesquisa = pesquisa }))
 }
 else
-{ 
+{
     <span>Nenhum registro cadastrado </span>
 }

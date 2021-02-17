@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using LojaVirtual.Database;
 using LojaVirtual.Libraries.Email;
 using LojaVirtual.Libraries.Login;
+using LojaVirtual.Libraries.Middleware;
 using LojaVirtual.Libraries.Sessao;
 using LojaVirtual.Repositories;
 using LojaVirtual.Repositories.Contracts;
@@ -115,7 +116,7 @@ namespace LojaVirtual
 
             app.UseAuthorization();
 
-            app.UseMiddleware<ValidateAntiForgeryTokenAttribute>();
+            app.UseMiddleware<ValidateAntiForgeryTokenMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

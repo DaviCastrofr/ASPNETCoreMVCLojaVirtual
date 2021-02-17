@@ -20,7 +20,7 @@ namespace LojaVirtual.Repositories
             _banco = banco;
             _conf = configuration;
         }
-        public void Atulizar(Categoria categoria)
+        public void Atualizar(Categoria categoria)
         {
             _banco.Update(categoria);
             _banco.SaveChanges();

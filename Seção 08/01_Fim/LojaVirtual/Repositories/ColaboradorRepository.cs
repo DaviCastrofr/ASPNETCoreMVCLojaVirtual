@@ -1,5 +1,6 @@
 ﻿using LojaVirtual.Database;
 using LojaVirtual.Models;
+using LojaVirtual.Models.Constants;
 using LojaVirtual.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -28,13 +29,13 @@ namespace LojaVirtual.Repositories
             _banco.SaveChanges();
         }
 
-        public void Atulizar(Colaborador colaborador)
+        public void Atualizar(Colaborador colaborador)
         {
             _banco.Update(colaborador);
             _banco.Entry(colaborador).Property(a => a.Senha).IsModified = false;
             _banco.SaveChanges();
         }
-        public void AtulizarSenha(Colaborador colaborador)
+        public void AtualizarSenha(Colaborador colaborador)
         {
             _banco.Update(colaborador);
             _banco.Entry(colaborador).Property(a => a.Senha).IsModified = false;
@@ -69,7 +70,7 @@ namespace LojaVirtual.Repositories
         {
             int RegistroPorPagina = 10;
             int numeroPagina = pagina ?? 1;
-            return _banco.Colaboradores.Where(a=>a.Tipo != "G").ToPagedList<Colaborador>(numeroPagina, RegistroPorPagina);
+            return _banco.Colaboradores.Where(a=>a.Tipo != ColaboradorTipoConstant.Gerente).ToPagedList<Colaborador>(numeroPagina, RegistroPorPagina);
         }
 
         public List<Colaborador> ObterColaboradorPorEmail(string email)

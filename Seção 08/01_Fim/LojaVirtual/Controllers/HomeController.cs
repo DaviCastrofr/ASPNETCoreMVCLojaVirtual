@@ -17,10 +17,10 @@ namespace LojaVirtual.Controllers
 {
     public class HomeController : Controller
     {
-        private GerenciarEmail _gerenciarEmail;
         private IClienteRepository _repositoryCliente;
         private INewsletterRepository _repositoryNewsletter;
         private LoginCliente _loginCliente;
+        private GerenciarEmail _gerenciarEmail;
 
         public HomeController(IClienteRepository repositoryCliente, INewsletterRepository repositoryNewsletter, LoginCliente loginCliente, GerenciarEmail gerenciarEmail)
         {
@@ -28,6 +28,7 @@ namespace LojaVirtual.Controllers
             _repositoryNewsletter = repositoryNewsletter;
             _loginCliente = loginCliente;
             _gerenciarEmail = gerenciarEmail;
+
         }
 
         [HttpGet]

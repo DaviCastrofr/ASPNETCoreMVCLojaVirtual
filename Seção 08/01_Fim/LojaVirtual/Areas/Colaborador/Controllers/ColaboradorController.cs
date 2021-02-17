@@ -6,6 +6,7 @@ using LojaVirtual.Libraries.Email;
 using LojaVirtual.Libraries.Filtro;
 using LojaVirtual.Libraries.Lang;
 using LojaVirtual.Libraries.Texto;
+using LojaVirtual.Models.Constants;
 using LojaVirtual.Repositories.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using X.PagedList;
@@ -13,7 +14,7 @@ using X.PagedList;
 namespace LojaVirtual.Areas.Colaborador.Controllers
 {
     [Area("Colaborador")]
-    [ColaboradorAutorizacao("G")]
+    [ColaboradorAutorizacao(ColaboradorTipoConstant.Gerente)]
     public class ColaboradorController : Controller
     {
         private IColaboradorRepository _colaboradorRespository;
@@ -44,7 +45,7 @@ namespace LojaVirtual.Areas.Colaborador.Controllers
             ModelState.Remove("Senha");
             if (ModelState.IsValid)
             {
-                colaborador.Tipo = "C";
+                colaborador.Tipo = ColaboradorTipoConstant.Comum;
                 colaborador.Senha = KeyGenerator.GetUniqueKey(8);
                 _colaboradorRespository.Cadastrar(colaborador);
 
@@ -63,7 +64,7 @@ namespace LojaVirtual.Areas.Colaborador.Controllers
         {
             Models.Colaborador colaborador = _colaboradorRespository.ObterColaborador(id);
             colaborador.Senha = KeyGenerator.GetUniqueKey(8);
-            _colaboradorRespository.AtulizarSenha(colaborador);
+            _colaboradorRespository.AtualizarSenha(colaborador);
 
             _gerenciarEmail.EnviarSenhaParaColaboradorPorEmail(colaborador);
 
@@ -85,7 +86,7 @@ namespace LojaVirtual.Areas.Colaborador.Controllers
             ModelState.Remove("Senha");
             if (ModelState.IsValid)
             {
-                _colaboradorRespository.Atulizar(colaborador);
+                _colaboradorRespository.Atualizar(colaborador);
 
                 TempData["MSG_S"] = Mensagem.MSG_S001;
 

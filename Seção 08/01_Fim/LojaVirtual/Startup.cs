@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using LojaVirtual.Database;
 using LojaVirtual.Libraries.Email;
 using LojaVirtual.Libraries.Login;
+using LojaVirtual.Libraries.Middleware;
 using LojaVirtual.Libraries.Sessao;
 using LojaVirtual.Repositories;
 using LojaVirtual.Repositories.Contracts;
@@ -47,6 +48,8 @@ namespace LojaVirtual
             services.AddScoped<INewsletterRepository, NewsletterRepository>();
             services.AddScoped<IColaboradorRepository, ColaboradorRepository>();
             services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+            services.AddScoped<IProdutoRepository, ProdutoRepository>();
+            services.AddScoped<IImagemRepository, ImagemRepository>();
 
             services.AddScoped<SmtpClient>(options => {
                 SmtpClient smtp = new SmtpClient()
@@ -75,8 +78,7 @@ namespace LojaVirtual
             {
                 opts.Cookie.IsEssential = true; 
             });
-            
-            
+
 
             services.AddScoped<Sessao>();
             services.AddScoped<LoginCliente>();
@@ -115,7 +117,7 @@ namespace LojaVirtual
 
             app.UseAuthorization();
 
-            app.UseMiddleware<ValidateAntiForgeryTokenAttribute>();
+            app.UseMiddleware<ValidateAntiForgeryTokenMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

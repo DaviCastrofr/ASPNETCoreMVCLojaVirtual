@@ -9,9 +9,11 @@
     <meta name="generator" content="Jekyll v3.8.5">
     <title>@ViewBag.Title</title>
 
+    <link href="~/css/StyleSheet.css" rel="stylesheet" type="text/css" />
+
     <!-- Bootstrap core CSS -->
     <link href="~/resources/lib/bootstrap-4.2.1-dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/resources/lib/pagedlist/PagedList.css" rel="stylesheet" type="text/css"/>
+    <link href="~/resources/lib/pagedlist/PagedList.css" rel="stylesheet" type="text/css" />
 
 
     <style>
@@ -67,7 +69,7 @@
                                 Produtos
                             </a>
                         </li>
-                        @if (colaborador.GetColaborador().Tipo == "G")
+                        @if (colaborador.GetColaborador() != null && colaborador.GetColaborador().Tipo == ColaboradorTipoConstant.Gerente)
                         {
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Colaborador" asp-action="Index">
@@ -77,7 +79,7 @@
                             </li>
                         }
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" asp-controller="Cliente" asp-action="Index">
                                 <span data-feather="users"></span>
                                 Cliente
                             </a>

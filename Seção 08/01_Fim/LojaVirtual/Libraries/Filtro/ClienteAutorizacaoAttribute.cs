@@ -9,6 +9,14 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace LojaVirtual.Libraries.Filtro
 {
+    /*
+     * Tipos de Filtros:
+     * - Autorização
+     * - Recurso
+     * - Ação
+     * - Exceção
+     * - Resultado
+     */
     public class ClienteAutorizacaoAttribute : Attribute, IAuthorizationFilter
     {
         LoginCliente _loginCliente;
@@ -23,4 +31,3 @@ namespace LojaVirtual.Libraries.Filtro
         }
     }
 }
-

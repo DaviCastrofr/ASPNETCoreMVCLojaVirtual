@@ -12,7 +12,6 @@ using X.PagedList;
 
 namespace LojaVirtual.Areas.Colaborador.Controllers
 {
-
     [Area("Colaborador")]
     [ColaboradorAutorizacao]
     public class CategoriaController : Controller
@@ -23,6 +22,7 @@ namespace LojaVirtual.Areas.Colaborador.Controllers
         {
             _categoriaRepository = categoriaRepository;
         }
+
         public IActionResult Index(int? pagina)
         {
             var categorias = _categoriaRepository.ObterTodasCategorias(pagina);
@@ -35,11 +35,10 @@ namespace LojaVirtual.Areas.Colaborador.Controllers
             ViewBag.Categorias = _categoriaRepository.ObterTodasCategorias().Select(a => new SelectListItem(a.Nome, a.Id.ToString()));
             return View();
         }
-
         [HttpPost]
-        public IActionResult Cadastrar([FromForm]Categoria categoria)
+        public IActionResult Cadastrar([FromForm] Categoria categoria)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _categoriaRepository.Cadastrar(categoria);
 
@@ -47,15 +46,16 @@ namespace LojaVirtual.Areas.Colaborador.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.Categorias = _categoriaRepository.ObterTodasCategorias();
+
+            ViewBag.Categorias = _categoriaRepository.ObterTodasCategorias().Select(a => new SelectListItem(a.Nome, a.Id.ToString()));
             return View();
         }
 
         [HttpGet]
         public IActionResult Atualizar(int id)
         {
-            var categoria =_categoriaRepository.ObterCategoria(id);
-            ViewBag.Categorias = _categoriaRepository.ObterTodasCategorias().Where(a=>a.Id != id).Select(a => new SelectListItem(a.Nome, a.Id.ToString()));
+            var categoria = _categoriaRepository.ObterCategoria(id);
+            ViewBag.Categorias = _categoriaRepository.ObterTodasCategorias().Where(a => a.Id != id).Select(a => new SelectListItem(a.Nome, a.Id.ToString()));
             return View(categoria);
         }
 
@@ -64,7 +64,7 @@ namespace LojaVirtual.Areas.Colaborador.Controllers
         {
             if (ModelState.IsValid)
             {
-                _categoriaRepository.Atulizar(categoria);
+                _categoriaRepository.Atualizar(categoria);
 
                 TempData["MSG_S"] = Mensagem.MSG_S001;
 
@@ -75,6 +75,7 @@ namespace LojaVirtual.Areas.Colaborador.Controllers
         }
 
         [HttpGet]
+        [ValidateHttpReferer]
         public IActionResult Excluir(int id)
         {
             _categoriaRepository.Excluir(id);
@@ -82,7 +83,7 @@ namespace LojaVirtual.Areas.Colaborador.Controllers
             TempData["MSG_S"] = Mensagem.MSG_S002;
 
             return RedirectToAction(nameof(Index));
-        } 
+        }
 
     }
 }

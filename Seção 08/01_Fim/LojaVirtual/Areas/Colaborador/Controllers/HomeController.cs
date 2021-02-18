@@ -20,6 +20,7 @@ namespace LojaVirtual.Areas.Colaborador.Controllers
             _repositoryColaborador = repositoryColaborador;
             _loginColaborador = loginColaborador;
         }
+
         [HttpGet]
         public IActionResult Login()
         {
@@ -45,6 +46,7 @@ namespace LojaVirtual.Areas.Colaborador.Controllers
         }
 
         [ColaboradorAutorizacao]
+        [ValidateHttpReferer]
         public IActionResult Logout()
         {
             _loginColaborador.Logout();
@@ -53,18 +55,18 @@ namespace LojaVirtual.Areas.Colaborador.Controllers
 
 
 
-        //public IActionResult RecuperarSenha()
-        //{
-        //    return View();
-        //}
-        //
-        //public IActionResult CadastrarNovaSenha()
-        //{
-        //    return View();
-        //}
-        //
-        //
-        //
+        public IActionResult RecuperarSenha()
+        {
+            return View();
+        }
+
+        public IActionResult CadastrarNovaSenha()
+        {
+            return View();
+        }
+
+
+
         [ColaboradorAutorizacao]
         public IActionResult Painel()
         {

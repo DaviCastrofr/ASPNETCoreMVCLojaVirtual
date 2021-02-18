@@ -57,17 +57,18 @@
     </div>
    
     <h2>Frete</h2>
-    <div class="form-group col-md-3">
-        <label asp-for="Peso" class="col-sm-2 col-form-label"></label>
-        <div class="input-group mb-2 mr-sm-2">
-            <input asp-for="Peso" class="form-control" placeholder="Digite o Peso do produto">
-            <div class="input-group-prepend">
-                <div class="input-group-text">kg</div>
-            </div>
-        </div>
-        <span asp-validation-for="Peso" class="text-danger"></span>
-    </div>
+    
     <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="Peso" class="col-sm-2 col-form-label"></label>
+            <div class="input-group mb-2 mr-sm-2">
+                <input asp-for="Peso" class="form-control" placeholder="Digite o Peso do produto">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">kg</div>
+                </div>
+            </div>
+            <span asp-validation-for="Peso" class="text-danger"></span>
+        </div>
         <div class="form-group col-md-3">
             <label asp-for="Largura" class="col-sm-2 col-form-label"></label>
             <div class="input-group mb-2 mr-sm-2">

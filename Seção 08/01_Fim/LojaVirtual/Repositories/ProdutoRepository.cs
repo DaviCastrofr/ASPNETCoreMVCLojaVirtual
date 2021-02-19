@@ -34,8 +34,8 @@ namespace LojaVirtual.Repositories
 
         public void Excluir(int Id)
         {
-            Produto cliente = ObterProduto(Id);
-            _banco.Remove(Id);
+            Produto produto = ObterProduto(Id);
+            _banco.Remove(produto);
             _banco.SaveChanges();
         }
 
